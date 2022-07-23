@@ -1,6 +1,6 @@
 import {Router} from "express";
 import { getCategories, postCategories } from "../controllers/categoriesController.js";
-import { validateCategories } from "../middlewares/CategoriesMiddleware.js";
+import { validateCategories } from "../middlewares/categoriesMiddleware.js";
 
 const categoriesRouter = Router();
 categoriesRouter.get("/categories" , getCategories);
