@@ -34,8 +34,17 @@ export async function postGames (req, res) {
   const game = req.body;
   try {
 
-    const gamesCategory = await db.query(`SELECT id FROM categories WHERE id = $1`, [game.categoryId]);
-    const gamesName = await db.query(`SELECT name FROM games WHERE name = $1`, [game.name]);
+    const gamesCategory = await db.query(`
+    SELECT id 
+    FROM categories 
+    WHERE id = $1
+    `, [game.categoryId]);
+
+    const gamesName = await db.query(`
+    SELECT name 
+    FROM games 
+    WHERE name = $1
+    `, [game.name]);
 
     if (gamesCategory.rowCount === 0) {
       return res.sendStatus(400);
@@ -46,7 +55,8 @@ export async function postGames (req, res) {
     }
 
     await db.query(`
-      INSERT INTO games (name, image, "stockTotal", "categoryId", "pricePerDay")
+      INSERT INTO games 
+      (name, image, "stockTotal", "categoryId", "pricePerDay")
       VALUES ($1, $2, $3, $4, $5);
     `, [game.name, game.image, game.stockTotal, game.categoryId, game.pricePerDay]);
 
