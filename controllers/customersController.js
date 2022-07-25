@@ -9,7 +9,10 @@ export async function getCustomers( req, res) {
             `SELECT * FROM customers`
           )
         : await db.query(
-            `SELECT * FROM customers WHERE cpf LIKE '${cpf}%';`
+            `
+            SELECT * FROM customers 
+            WHERE cpf LIKE '${cpf}%';
+            `
           );
       return res.send(customers.rows);
      
